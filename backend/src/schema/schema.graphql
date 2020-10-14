@@ -1,3 +1,9 @@
 type Query {
     helloWorld: String!
+    getRandomPoints(amount: Int!): [Point]!
+}
+
+type Point {
+    xCoordinate: Float!
+    yCoordinate: Float!
 }
