@@ -1,8 +1,8 @@
 type Query {
-    getRandomPoints(amount: Int!): [Point]!
+  getRandomPoints(amount: Int!): [Point]!
 }
 
 type Point {
-    xCoordinate: Float!
-    yCoordinate: Float!
+  xCoordinate: Float!
+  yCoordinate: Float!
 }
