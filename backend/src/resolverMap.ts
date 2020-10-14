@@ -4,9 +4,6 @@ import { getRandomPoints } from './service/RandomPointService';
 
 const resolverMap: IResolvers = {
     Query: {
-        helloWorld(_: void, args: void): string {
-            return 'Hello World!';
-        },
         getRandomPoints(
             _: void,
             args: {
