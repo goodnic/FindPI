@@ -1,5 +1,5 @@
 <template>
-  <v-conotainer>
+  <v-container>
     <v-row class="text-center">
       <v-col cols="12">
         <h1>
@@ -32,7 +32,7 @@
         </v-container>
       </v-form>
     </v-row>
-  </v-conotainer>
+  </v-container>
 </template>
 
 <script>
@@ -41,13 +41,25 @@ import gql from 'graphql-tag';
 
 export default Vue.extend({
   name: 'Home',
-  data: () => ({
-    title: 'Find PI using the Monte Carlo method.',
-    numberOfRandomPointsToFetch: null,
-    randomPoints: [],
-  }),
+  data() {
+    return {
+      title: 'Find PI using the Monte Carlo method.',
+      numberOfRandomPointsToFetch: null,
+      randomPoints: [],
+    };
+  },
   computed: {
-    approximatedPI: () => 3.141,
+    approximatedPI() {
+      const randomPointsCount = this.randomPoints.length;
+      let randomPointsIn = 0;
+      this.randomPoints.forEach((randomPoint) => {
+        const distanceToOrigin = randomPoint.xCoordinate ** 2 + randomPoint.yCoordinate ** 2;
+        if (distanceToOrigin < 1) {
+          randomPointsIn += 1;
+        }
+      });
+      return 4 * (randomPointsIn / randomPointsCount);
+    },
   },
   apollo: {
     randomPoints: {
