@@ -2,18 +2,13 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <h1>
+        <h1 v-if="Number.isNaN(approximatedPI)">
           {{ title }}
         </h1>
-      </v-col>
-    </v-row>
-    <v-row class="text-center">
-      <v-col cols="6">
-        <h1>
-          {{ approximatedPI }}
+        <h1 v-else>
+          PI is approximately {{ approximatedPI }}
         </h1>
       </v-col>
-      <v-col cols="6"> </v-col>
     </v-row>
     <v-row>
       <v-spacer>
@@ -24,6 +19,7 @@
           hide-details
           single-line
           type="number"
+          placeholder="Enter a number"
         >
         </v-text-field>
       </v-col>
