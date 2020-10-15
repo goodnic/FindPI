@@ -18,16 +18,39 @@
   </v-conotainer>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue';
+import gql from 'graphql-tag';
 
 export default Vue.extend({
   name: 'Home',
   data: () => ({
     title: 'Find PI using the Monte Carlo method.',
+    numberOfRandomPointsToFetch: null,
+    randomPoints: [],
   }),
   computed: {
     approximatedPI: () => 3.141,
+  },
+  apollo: {
+    randomPoints: {
+      query: gql`
+        query RandomPoints($amount: Int!) {
+          randomPoints: getRandomPoints(amount: $amount) {
+            xCoordinate
+            yCoordinate
+          }
+        }
+      `,
+      variables() {
+        return {
+          amount: this.numberOfRandomPointsToFetch,
+        };
+      },
+      skip() {
+        return this.numberOfRandomPointsToFetch === null;
+      },
+    },
   },
 });
 </script>
