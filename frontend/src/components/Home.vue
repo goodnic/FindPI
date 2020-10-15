@@ -16,21 +16,19 @@
       <v-col cols="6"> </v-col>
     </v-row>
     <v-row>
-      <v-form>
-        <v-container>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model.number="numberOfRandomPointsToFetch"
-                hide-details
-                single-line
-                type="number"
-              >
-              </v-text-field>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-form>
+      <v-spacer>
+      </v-spacer>
+      <v-col cols="3">
+        <v-text-field
+          v-model.number="numberOfRandomPointsToFetch"
+          hide-details
+          single-line
+          type="number"
+        >
+        </v-text-field>
+      </v-col>
+      <v-spacer>
+      </v-spacer>
     </v-row>
   </v-container>
 </template>
