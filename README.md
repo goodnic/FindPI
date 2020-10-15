@@ -5,12 +5,14 @@ Coding Task for the application at WhatToLabel
 First off, open up a terminal, naviagte to the project source and enter the following commands: 
 ```
 cd backend
+npm install
 npm run build
 npm run start
 ```
 After successful start-up of the backend, open up another terminal an move to the project source once again. Enter the following commands: 
 ```
 cd frontend
+npm install
 npm run build
 npm run serve
 ```
