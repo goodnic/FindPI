@@ -10,6 +10,13 @@
         </h1>
       </v-col>
     </v-row>
+    <v-row v-if="!Number.isNaN(approximatedPI)">
+      <v-spacer>
+      </v-spacer>
+      <monte-carlo-chart :chart-data="datacollection"></monte-carlo-chart>
+      <v-spacer>
+      </v-spacer>
+    </v-row>
     <v-row>
       <v-spacer>
       </v-spacer>
@@ -32,14 +39,19 @@
 <script>
 import Vue from 'vue';
 import gql from 'graphql-tag';
+import MonteCarloChart from './MonteCarloChart.vue';
 
 export default Vue.extend({
   name: 'Home',
+  components: {
+    MonteCarloChart,
+  },
   data() {
     return {
       title: 'Find PI using the Monte Carlo method.',
       numberOfRandomPointsToFetch: null,
       randomPoints: [],
+      datacollection: null,
     };
   },
   computed: {
@@ -53,6 +65,25 @@ export default Vue.extend({
         }
       });
       return 4 * (randomPointsIn / randomPointsCount);
+    },
+  },
+  watch: {
+    randomPoints(newPoints) {
+      const intermediate = {
+        labels: [],
+        datasets: [{
+          label: 'First',
+          data: [],
+        }],
+      };
+      newPoints.forEach((newPoint) => {
+        const data = {
+          x: newPoint.xCoordinate,
+          y: newPoint.yCoordinate,
+        };
+        intermediate.datasets[0].data.push(data);
+      });
+      this.datacollection = intermediate;
     },
   },
   apollo: {
